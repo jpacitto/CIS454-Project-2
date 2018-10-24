@@ -21,7 +21,7 @@ $(window).on("gamepadconnected", function() {
 });
 
 $(window).on("gamepaddisconnected", function() {
-	console.log("Gamepad Connected")
+	console.log("Gamepad Disconnect")
 });
 
 var state = 0;
@@ -30,13 +30,52 @@ var controller;
 
 function loop()
 {
- 	controller= navigator.getGamepads()[1];
-	i = button(controller);
-
+ 	controller= navigator.getGamepads()[0];
+	i = getButton(controller);
 	if(controller.buttons[i].pressed && state == 0)
 	{
 		state = 1;
 		console.log(i + " button pressed");
+		console.log(cube.position);
+
+		if(i == 15 && cube.position.x < 1.4)
+		{
+			cube.position.x += 0.1;
+		}
+		else if(i == 14 && cube.position.x > -1.4)
+		{
+			cube.position.x -= 0.1;
+		}
+		else if(i == 12 && cube.position.y < 1.4)
+		{
+			cube.position.y += 0.1;
+		}
+		else if(i == 13 && cube.position.y > -1.4)
+		{
+			cube.position.y -= 0.1;
+		}
+		else if(i == 3 && cube.position.z > -1.4)
+		{
+			cube.position.z -= 0.1;
+		}
+		else if(i == 0 && cube.position.z < 1.4)
+		{
+			cube.position.z += 0.1;
+		}
+		else if(i == 7)
+		{
+			plane1.material.color.setHex(0x9359BB)
+			plane2.material.color.setHex(0xB6B029)
+		}
+		else if(i == 6)
+		{
+			plane1.material.color.setHex(0xCF2C2C);
+			plane2.material.color.setHex(0x29B69C);
+		}
+
+		//cube.position.x = (Math.random() * (1.6 + 1.6) - 1.6).toFixed(2);
+		//cube.position.y = (Math.random() * (1.6 + 1.6) - 1.6).toFixed(2);
+		//cube.position.z = (Math.random() * (1.6 + 1.6) - 1.6).toFixed(2);
 	}
 
 	if(controller.buttons[i].pressed == false && state == 1)
@@ -44,13 +83,27 @@ function loop()
 		state = 0;
 	}
 
+	if(controller.axes[0] > 0.5)
+	{
+		cameraRotate = 0.01;
+	}
+	else if(controller.axes[0] < -0.5)
+	{
+		cameraRotate = -0.01;
+	}
+	else
+	{
+		cameraRotate = 0;
+	}
+
 	window.requestAnimationFrame(loop);
 }
 
 window.requestAnimationFrame(loop);
 
-function button(controller)
+function getButton(controller)
 {
+
 	for(var i = 0; i < controller.buttons.length; i++)
 	{
 		if(controller.buttons[i].pressed)
