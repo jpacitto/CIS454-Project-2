@@ -36,31 +36,32 @@ function loop()
 	{
 		state = 1;
 		console.log(i + " button pressed");
-		console.log(cube.position);
 
-		if(i == 15 && cube.position.x < 1.4)
+		console.log(cube1.position.x + " : " + cube2.position.x);
+		
+		if(i == 15 && cube2.position.x < 1.4)
 		{
-			cube.position.x += 0.1;
+			cube2.position.x += 0.1;
 		}
-		else if(i == 14 && cube.position.x > -1.4)
+		else if(i == 14 && cube2.position.x > -1.4)
 		{
-			cube.position.x -= 0.1;
+			cube2.position.x -= 0.1;
 		}
-		else if(i == 12 && cube.position.y < 1.4)
+		else if(i == 12 && cube2.position.y < 1.4)
 		{
-			cube.position.y += 0.1;
+			cube2.position.y += 0.1;
 		}
-		else if(i == 13 && cube.position.y > -1.4)
+		else if(i == 13 && cube2.position.y > -1.4)
 		{
-			cube.position.y -= 0.1;
+			cube2.position.y -= 0.1;
 		}
-		else if(i == 3 && cube.position.z > -1.4)
+		else if(i == 3 && cube2.position.z > -1.4)
 		{
-			cube.position.z -= 0.1;
+			cube2.position.z -= 0.1;
 		}
-		else if(i == 0 && cube.position.z < 1.4)
+		else if(i == 0 && cube2.position.z < 1.4)
 		{
-			cube.position.z += 0.1;
+			cube2.position.z += 0.1;
 		}
 		else if(i == 7)
 		{
@@ -72,10 +73,6 @@ function loop()
 			plane1.material.color.setHex(0xCF2C2C);
 			plane2.material.color.setHex(0x29B69C);
 		}
-
-		//cube.position.x = (Math.random() * (1.6 + 1.6) - 1.6).toFixed(2);
-		//cube.position.y = (Math.random() * (1.6 + 1.6) - 1.6).toFixed(2);
-		//cube.position.z = (Math.random() * (1.6 + 1.6) - 1.6).toFixed(2);
 	}
 
 	if(controller.buttons[i].pressed == false && state == 1)
