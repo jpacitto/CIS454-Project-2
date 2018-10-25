@@ -1,24 +1,49 @@
-var light = new THREE.PointLight(0xffffff, 2, 6);
-light.position.set(0, 1, 1);
-scene.add(light);
+var lights = [];
+lights[0] = new THREE.PointLight(0xffffff, 1, 15);
+lights[1] = new THREE.PointLight(0xffffff, 1, 15);
 
-var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+lights[0].position.set(6, 0, 6);
+lights[0].castShadow = true;
+scene.add(lights[0]);
 
-var material1 = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
-cube1 = new THREE.Mesh( geometry, material1 );
+lights[1].position.set(-6, 0, -6);
+lights[1].castShadow = true;
+scene.add(lights[1]);
+
+var ambientLight = new THREE.AmbientLight(0x404040);
+scene.add(ambientLight);
+
+var geometry = new THREE.SphereGeometry( 0.5, 34, 34 );
+
+var geometry1 = new THREE.SphereGeometry( 0.7, 34, 34 );
+var material1 = new THREE.MeshStandardMaterial( { color: 0x00ff00 } );
+cube1 = new THREE.Mesh( geometry1, material1 );
+cube1.castShadow = true;
+cube1.receiveShadow = true;
 scene.add( cube1 );
 
-var material2 = new THREE.MeshPhongMaterial( { color: 0xffffff } );
+var material2 = new THREE.MeshStandardMaterial( { color: 0x69CDFF, opacity: 1, transparent: true } );
 cube2 = new THREE.Mesh( geometry, material2 );
+cube2.castShadow = true;
+cube2.receiveShadow = true;
 scene.add( cube2 );
 
-var material3 = new THREE.MeshPhongMaterial( { color: 0xffffff } );
+var material3 = new THREE.MeshStandardMaterial( { color: 0x707373, opacity: 1, transparent: true } );
 cube3 = new THREE.Mesh( geometry, material3 );
+cube3.castShadow = true;
+cube3.receiveShadow = true;
 scene.add( cube3 );
+
+var material4 = new THREE.MeshStandardMaterial( { color: 0x707373, opacity: 1, transparent: true } );
+cube4 = new THREE.Mesh( geometry, material4 );
+cube4.castShadow = true;
+cube4.receiveShadow = true;
+scene.add( cube4 );
 
 randomPosition(cube1);
 randomPosition(cube2);
 randomPosition(cube3);
+randomPosition(cube4);
 
 var cameraRotate = 0;
 
@@ -34,8 +59,8 @@ var animate = function ()
 
     camera.lookAt(scene.position);
 
-    checkCubes();
-
+    //checkCubes();
+    renderer.sortObjects = false;
 	renderer.render( scene, camera );
 };
 
