@@ -15,7 +15,7 @@
 //Button 14: D-pad left
 //Button 15: D-pad right
 
-
+//checks if controller is connected
 $(window).on("gamepadconnected", function() {
 	console.log("Gamepad Connected");
 });
@@ -32,6 +32,7 @@ var c = 0;
 var cubes = [cube2, cube3, cube4];
 cubes[c].material.color.setHex(0x69CDFF);
 
+//loop for checking controller inputs
 function loop()
 {
  	controller= navigator.getGamepads()[0];
@@ -46,6 +47,7 @@ function loop()
 		var y = parseFloat(cubes[c].position.y);
 		var z = parseFloat(cubes[c].position.z);
 
+		//possible inputs
 		switch(i)
 		{
 			case 15:
@@ -140,7 +142,7 @@ function loop()
 		camera.fov -= 1;
 		camera.updateProjectionMatrix();
 	}
-	
+
 	window.requestAnimationFrame(loop);
 }
 
